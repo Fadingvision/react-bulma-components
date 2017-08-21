@@ -1,0 +1,32 @@
+{
+  "name": "react-bulma-components",
+  "version": "1.0.0",
+  "description": "react components",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blackLearning/react-bulma-components.git"
+  },
+  "peerDependencies": {
+    "react": "^15.6.1 || ^16.0.0-beta.5",
+    "react-dom": "^15.6.1 || ^16.0.0-beta.5",
+    "bulma": "^0.5.1"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "blackLearning",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blackLearning/react-bulma-components/issues"
+  },
+  "homepage": "https://github.com/blackLearning/react-bulma-components#readme",
+  "dependencies": {
+    "bulma": "^0.5.1",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  }
+}
