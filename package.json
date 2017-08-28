@@ -4,19 +4,45 @@
   "description": "react components",
   "main": "src/index.js",
   "scripts": {
-    "test": "npm test"
+    "docs:deploy": "cd docs && yarn build && firebase deploy",
+    "docs:build": "rimraf docs/src/pages/component-api/* && babel-node ./scripts/build-api-docs.js",
+    "build": "npm run build:es2015 && npm run build:es2015modules && npm run build:copy-files && npm run build:umd:dev && npm run build:umd:prod",
+    "build:es2015": "cross-env NODE_ENV=production babel ./src --ignore *.spec.js --out-dir ./build",
+    "build:es2015modules": "cross-env NODE_ENV=production BABEL_ENV=modules babel ./src/index.js --out-file ./build/index.es.js",
+    "build:copy-files": "babel-node ./scripts/copy-files.js",
+    "build:umd:dev": "webpack --config scripts/umd.webpack.config.js",
+    "build:umd:prod": "cross-env NODE_ENV=production webpack --config scripts/umd.webpack.config.js",
+    "prettier": "find . -name \"*.js\" | grep -v -f .eslintignore | xargs prettier --write --single-quote --trailing-comma all --print-width 100",
+    "clean:build": "rimraf build",
+    "lint": "eslint . --cache && echo \"eslint: no lint errors\"",
+    "prebuild": "npm run clean:build",
+    "size": "size-limit 120KB build/index.js",
+    "size:why": "size-limit --why build/index.js",
+    "start": "cd docs && npm start",
+    "test": "npm run lint && npm run flow && npm run test:unit",
+    "test:unit": "cross-env NODE_ENV=test mocha test/**/*.spec.js src/{,**/}*.spec.js",
+    "test:watch": "yarn test:unit -- -w",
+    "test:coverage": "cross-env NODE_ENV=test BABEL_ENV=coverage nyc mocha test/**/*.spec.js src/{,**/}*.spec.js && nyc report -r lcovonly",
+    "test:coverage:html": "cross-env NODE_ENV=test BABEL_ENV=coverage nyc mocha test/**/*.spec.js src/{,**/}*.spec.js && nyc report --reporter=html",
+    "test:karma": "cross-env NODE_ENV=test karma start test/karma.conf.js --single-run",
+    "test:regressions": "webpack --config test/regressions/webpack.config.js && vrtest run --config test/vrtest.config.js --record",
+    "argos": "argos upload test/regressions/screenshots/chrome --token $ARGOS_TOKEN || true",
+    "flow": "flow --show-all-errors",
+    "version": "yarn build",
+    "release": "np --no-publish --any-branch",
+    "postrelease": "yarn docs:deploy && npm publish build --tag next"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/blackLearning/react-bulma-components.git"
   },
-  "peerDependencies": {
-    "react": "^15.6.1 || ^16.0.0-beta.5",
-    "react-dom": "^15.6.1 || ^16.0.0-beta.5",
-    "bulma": "^0.5.1"
+  "bugs": {
+    "url": "https://github.com/blackLearning/react-bulma-components/issues"
   },
+  "homepage": "https://github.com/blackLearning/react-bulma-components",
   "keywords": [
-    "react"
+    "react",
+    "react-bulma-components"
   ],
   "author": "blackLearning",
   "license": "MIT",
@@ -24,9 +50,53 @@
     "url": "https://github.com/blackLearning/react-bulma-components/issues"
   },
   "homepage": "https://github.com/blackLearning/react-bulma-components#readme",
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/**/*.spec.{js,jsx}"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 60,
+        "branches": 60,
+        "functions": 60,
+        "lines": 60
+      }
+    },
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "jsx"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/build/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/build/jest/fileTransform.js"
+    },
+    "moduleNameMapper": {
+      ".*\\.(css|less|styl|scss|sass)$": "<rootDir>/__mocks__/styleMock.js",
+      ".*\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+    ],
+    "testRegex": "src/.*\\.spec\\.js$"
+  },
+  "peerDependencies": {
+    "react": "^15.6.1 || ^16.0.0-beta.5",
+    "react-dom": "^15.6.1 || ^16.0.0-beta.5",
+    "bulma": "^0.5.1"
+  },
   "dependencies": {
     "bulma": "^0.5.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
+  },
+  "lint-staged": {
+    "src/**/*.js": "eslint -c ./.eslintrc.js --format node_modules/eslint-friendly-formatter --ignore-pattern *.spec.js --fix"
   }
 }
