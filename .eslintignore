@@ -1,0 +1,9 @@
+node_modules
+/build/
+/tmp/
+/coverage/
+/docs/build/
+/packages/*/lib/
+/test/coverage/
+/test/regressions/site/build/
+/.git
