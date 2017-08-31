@@ -1,6 +1,1 @@
-import React from 'react';
-
-function Button() {
-  return <div>123</div>;
-}
-export default Button;
+export { default as Button } from './components/Button'; // eslint-disable-line

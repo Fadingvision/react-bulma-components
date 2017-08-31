@@ -16,7 +16,12 @@ module.exports = {
     },
     extends: ['airbnb', "plugin:react/recommended"], // 配置代码检查风格
     'rules': {
+        // react
         'react/jsx-filename-extension': 0,
+        'react/prop-types': 0,
+
+        // common rules
+        'comma-dangle': 0,
     },
 
     "env": {
