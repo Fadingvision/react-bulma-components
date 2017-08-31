@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import Button from '../../src';
+import { Button } from '../../src';
 
 class App extends Component {
   render() {
-    return (
-      <Button />
-    );
+    return <Button type="primary">123</Button>;
   }
 }
 
