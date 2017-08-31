@@ -7,3 +7,4 @@ node_modules
 /test/coverage/
 /test/regressions/site/build/
 /.git
+src/components/**/*.spec.js
