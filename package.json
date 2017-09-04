@@ -77,11 +77,10 @@
     "bulma": "^0.5.1"
   },
   "dependencies": {
-    "bulma": "^0.5.1",
     "classnames": "^2.2.5",
     "prop-types": "^15.5.10",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "recompose": "^0.25.0",
+    "styled-components": "^2.1.2"
   },
   "lint-staged": {
     "src/**/*.js": "eslint -c ./.eslintrc.js --format node_modules/eslint-friendly-formatter --ignore-pattern *.spec.js --fix"
@@ -106,7 +105,6 @@
     "husky": "^0.14.3",
     "jest": "^20.0.4",
     "lint-staged": "^4.0.4",
-    "react-test-renderer": "^15.6.1",
-    "recompose": "^0.25.0"
+    "react-test-renderer": "^15.6.1"
   }
 }
