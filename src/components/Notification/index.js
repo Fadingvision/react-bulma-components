@@ -14,6 +14,7 @@ class Notification extends Component {
     msg: null,
     type: null,
     showClose: true,
+    animation: true,
   };
 
   constructor(props) {
@@ -24,6 +25,8 @@ class Notification extends Component {
     this.timer = null;
     this.delayClose = this.delayClose.bind(this);
     this.clearToast = this.clearToast.bind(this);
+    this.leave = this.leave.bind(this);
+    this.isClose = false;
   }
 
   componentDidMount() {
@@ -47,6 +50,24 @@ class Notification extends Component {
   }
 
   clearToast() {
+    this.notificationDom.classList.remove('bounceInRight');
+    this.notificationDom.classList.add('bounceOutRight');
+
+    if (this.props.animation) {
+      this.isClose = true;
+    } else {
+      this.destory();
+    }
+  }
+
+  leave() {
+    if (this.isClose) {
+      this.destory();
+      this.isClose = false;
+    }
+  }
+
+  destory() {
     ReactDOM.unmountComponentAtNode(div);
     if (is.function(this.props.onClose)) this.props.onClose();
   }
@@ -56,7 +77,9 @@ class Notification extends Component {
       type,
       msg,
       className,
-      showClose
+      style,
+      showClose,
+      animation
     } = this.props;
 
     const {
@@ -64,13 +87,28 @@ class Notification extends Component {
     } = this.state;
 
     const classnames = classNames('notification', {
-      [`is-${type}`]: type
+      [`is-${type}`]: type,
+      animated: animation,
+      bounceInRight: animation
     }, className);
+
+    const styleObj = Object.assign({
+      position: 'fixed',
+      right: '20px',
+      top: '20px',
+      zIndex: 1000,
+      width: '335px'
+    }, style);
 
     if (!isShow) return null;
     return (
-      <div className={classnames}>
-        {showClose && <button className="delete" />}
+      <div
+        className={classnames}
+        style={styleObj}
+        onAnimationEnd={this.leave}
+        ref={notification => { this.notificationDom = notification; }}
+      >
+        {showClose && <button className="delete" onClick={this.clearToast} />}
         <span>{msg}</span>
       </div>
     );
@@ -80,13 +118,14 @@ const TYPE_ARR = ['error', 'warn', 'success'];
 const notification = msg => {
   const config = is.object(msg) ? msg : { msg };
   const component = React.createElement(Notification, config);
-  document.body.appendChild(div);
+  notification.container = config.container || document.body;
+  notification.container.appendChild(div);
   ReactDOM.render(component, div);
 };
 
 notification.destory = () => {
   ReactDOM.unmountComponentAtNode(div);
-  document.body.removeChild(div);
+  notification.container.removeChild(div);
 };
 TYPE_ARR.forEach(type => {
   notification[type] = msg => {
