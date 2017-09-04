@@ -5,7 +5,12 @@ import { Button, notification } from '../../src';
 
 class App extends Component {
   componentDidMount() {
-    notification('asd')
+    notification({
+      msg: 'type',
+      type: 'primary',
+      closeTimeoutMS: 0,
+      animation: false,
+    })
   }
 
   render() {
