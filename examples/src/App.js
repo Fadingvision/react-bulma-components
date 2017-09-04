@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-import { Button, notification } from '../../src';
+import { Button, notification, Progress } from '../../src';
 
 class App extends Component {
   componentDidMount() {
@@ -9,12 +9,14 @@ class App extends Component {
       msg: 'type',
       type: 'primary',
       closeTimeoutMS: 0,
-      animation: false,
     })
   }
 
   render() {
-    return <Button type="primary">123</Button>;
+    return <div>
+      <Button type="primary">123</Button>
+      <Progress value="80" type="primary"></Progress>
+    </div>;
   }
 }
 
