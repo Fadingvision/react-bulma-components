@@ -1,15 +1,15 @@
 // @flow
 
 const path = require('path');
-const webpack = require('webpack');
+const webpack = require('webpack'); // eslint-disable-line
 
-const LIBRARY_NAME = 'material-ui';
+const LIBRARY_NAME = 'react-bulma';
 const baseConfig = {
   entry: {
-    'material-ui': path.join(__dirname, '../src/index.js'),
+    'react-bulma': path.join(__dirname, '../src/index.js'),
   },
   output: {
-    path: path.join(__dirname, '../build/umd'),
+    path: path.join(__dirname, '../lib'),
     library: LIBRARY_NAME,
     libraryTarget: 'umd',
     umdNamedDefine: true,

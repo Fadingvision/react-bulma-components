@@ -1,6 +1,7 @@
 # Exclude compiled files
 build
 coverage
+/es
 /lib
 /test/regressions/screenshots/output
 /test/selenium-output
