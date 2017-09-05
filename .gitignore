@@ -1,6 +1,6 @@
 # Exclude compiled files
 build
-coverage
+/coverage
 /es
 /lib
 /test/regressions/screenshots/output

@@ -11,6 +11,7 @@ const baseConfig = {
   output: {
     path: path.join(__dirname, '../lib'),
     library: LIBRARY_NAME,
+    filename: 'index.js',
     libraryTarget: 'umd',
     umdNamedDefine: true,
   },
@@ -52,9 +53,6 @@ let config;
 
 if (process.env.NODE_ENV === 'production') {
   config = Object.assign({}, baseConfig, {
-    output: Object.assign({}, baseConfig.output, {
-      filename: `${LIBRARY_NAME}.production.min.js`,
-    }),
     plugins: baseConfig.plugins.concat([
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify('production'),
@@ -66,12 +64,6 @@ if (process.env.NODE_ENV === 'production') {
         },
       }),
     ]),
-  });
-} else {
-  config = Object.assign({}, baseConfig, {
-    output: Object.assign({}, baseConfig.output, {
-      filename: `${LIBRARY_NAME}.development.js`,
-    }),
   });
 }
 

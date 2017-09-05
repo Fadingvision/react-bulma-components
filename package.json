@@ -11,14 +11,13 @@
     "prettier": "find . -name \"*.js\" | grep -v -f .eslintignore | xargs prettier --write --single-quote --trailing-comma all --print-width 100",
     "clean": "rimraf es lib coverage stats.json",
     "lint": "eslint -c ./.eslintrc.js --format node_modules/eslint-friendly-formatter --ignore-pattern *.spec.js --ignore-pattern 'node_modules/' src/ || exit 0 && echo \"eslint: no lint errors\"",
-    "size": "size-limit 120KB build/index.js",
-    "size:why": "size-limit --why build/index.js",
-    "start": "babel-node ./build/dev.js",
-    "test": "npm run lint && npm run flow && npm run test:unit",
+    "size": "size-limit 120KB es/index.js",
+    "size:why": "size-limit --why es/index.js",
+    "start": "node examples/scripts/start.js",
+    "test": "npm run lint && npm run test:unit",
     "test:unit": "cross-env NODE_ENV=test jest",
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "test:coverage": "cross-env NODE_ENV=test jest --coverage || exit 0",
-    "argos": "argos upload test/regressions/screenshots/chrome --token $ARGOS_TOKEN || true",
     "release": "np --no-publish --any-branch",
     "postrelease": "yarn docs:deploy && npm publish build --tag next",
     "precommit": "lint-staged"
@@ -71,6 +70,11 @@
     ],
     "testRegex": "src/.*\\.spec\\.js$"
   },
+   "size-limit": [
+      {
+        "webpack": false
+      }
+   ],
   "peerDependencies": {
     "react": "^15.6.1 || ^16.0.0-beta.5",
     "react-dom": "^15.6.1",
@@ -109,6 +113,7 @@
     "jest": "^20.0.4",
     "lint-staged": "^4.0.4",
     "react-test-renderer": "^15.6.1",
+    "size-limit": "^0.11.0",
     "webpack": "^3.5.5"
   }
 }
