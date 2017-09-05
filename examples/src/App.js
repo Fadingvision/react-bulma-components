@@ -5,8 +5,11 @@ import { Button, notification, LinearProgress } from '../../src';
 
 class App extends Component {
   componentDidMount() {
+  }
+
+  openNotification() {
     notification({
-      msg: 'type',
+      msg: 'notification',
       type: 'primary',
       closeTimeoutMS: 0
     })
@@ -14,8 +17,8 @@ class App extends Component {
 
   render() {
     return <div>
-      <Button type="primary">123</Button>
-      <LinearProgress value="50" mode="determinate" type="primary" />
+      <Button type="primary" onClick={this.openNotification}>open Notification</Button>
+      <LinearProgress value="50" mode="indeterminate" type="primary" />
     </div>;
   }
 }

@@ -19,9 +19,6 @@ class Notification extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      isShow: true
-    };
     this.timer = null;
     this.delayClose = this.delayClose.bind(this);
     this.clearToast = this.clearToast.bind(this);
@@ -82,10 +79,6 @@ class Notification extends Component {
       animation
     } = this.props;
 
-    const {
-      isShow
-    } = this.state;
-
     const classnames = classNames('notification', {
       [`is-${type}`]: type,
       animated: animation,
@@ -100,7 +93,6 @@ class Notification extends Component {
       width: '335px'
     }, style);
 
-    if (!isShow) return null;
     return (
       <div
         className={classnames}

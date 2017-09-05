@@ -9,11 +9,11 @@ const progressActiveKeyFrames = keyframes`
     width: 0;
   }
   20% {
-    opacity: 0.5;
+    opacity: 0.6;
     width: 0;
   }
   100% {
-    opacity: 0;
+    opacity: 0.1;
     width: ${props => props.value}%;
   }
 `;
@@ -33,7 +33,7 @@ const ProgressContainer = styled.div`
     height: 100%;
     background: #fff;
     width: ${props => props.value}%;
-    animation: ${progressActiveKeyFrames} 2.4s cubic-bezier(0.23, 1, 0.32, 1) infinite;
+    animation: ${progressActiveKeyFrames} 2s cubic-bezier(0.23, 1, 0.32, 1) infinite;
   }
 `;
 
