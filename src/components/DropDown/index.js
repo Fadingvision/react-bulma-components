@@ -1,59 +1,38 @@
 import React, { Component, cloneElement } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-// import recompose from 'recompose';
+import { compose, withState, withHandlers } from 'recompose';
 import outsideClick from './outsideClick';
 
 class DropDown extends Component {
-  constructor() {
-    super();
-    this.state = {
-      isActive: false
-    }
-  }
-
   handleClickOutside = evt => {
-    this.hideMenu(evt);
+    this.props.hideMenu(evt);
   }
-
-  showMenu = () => {
-    this.setState({
-      isActive: true
-    });
-  };
-
-  hideMenu = () => {
-    this.setState({
-      isActive: false
-    });
-  };
-
-  toggleMenu = () => {
-    this.setState(prevState => ({
-      isActive: !prevState.isActive
-    }));
-  };
 
   render() {
     const {
       className,
       title,
+      isActive,
       children,
-      triggerAction
+      triggerAction,
+      showMenu,
+      hideMenu,
+      toggleMenu
     } = this.props;
 
     const dropDownClass = classNames('dropdown', {
-      'is-active': this.state.isActive
+      'is-active': isActive
     }, className);
 
     const kids = cloneElement(children, {
-      onClick: this.hideMenu
+      onClick: hideMenu
     })
 
     let dropDown;
     if (triggerAction === 'hover') {
       dropDown = (
-        <div className={dropDownClass} onMouseOver={this.showMenu} onMouseOut={this.hideMenu}>
+        <div className={dropDownClass} onMouseOver={showMenu} onMouseOut={hideMenu}>
           <DropDown.Trigger>{title}</DropDown.Trigger>
           {kids}
         </div>
@@ -61,7 +40,7 @@ class DropDown extends Component {
     } else {
       dropDown = (
         <div className={dropDownClass}>
-          <DropDown.Trigger onClick={this.toggleMenu}>{title}</DropDown.Trigger>
+          <DropDown.Trigger onClick={toggleMenu}>{title}</DropDown.Trigger>
           {kids}
         </div>
       )
@@ -121,5 +100,13 @@ Menu.Divider = function Divider() {
   )
 }
 
-export default outsideClick(DropDown);
+export default compose(
+  withState('isActive', 'setIsActive', false),
+  withHandlers({
+    showMenu: ({ setIsActive }) => () => setIsActive(true),
+    hideMenu: ({ setIsActive }) => () => setIsActive(false),
+    toggleMenu: ({ setIsActive }) => () => setIsActive(prevState => !prevState)
+  }),
+  outsideClick
+)(DropDown);
 
