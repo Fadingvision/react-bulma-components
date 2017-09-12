@@ -1,70 +1,125 @@
-import React from 'react';
+import React, { Component, cloneElement } from 'react';
 import classNames from 'classnames';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 // import recompose from 'recompose';
+import outsideClick from './outsideClick';
 
-function DropDown({
-  isActive,
-  className,
-  title,
-  children
-}) {
-  const dropDownClass = classNames('dropdown', {
-    'is-active': isActive
-  }, className);
+class DropDown extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isActive: false
+    }
+  }
 
-  return (
-    <div className={dropDownClass}>
-      <DropDown.Trigger>{title}</DropDown.Trigger>
-      {children}
-    </div>
-  )
+  handleClickOutside = evt => {
+    this.hideMenu(evt);
+  }
+
+  showMenu = () => {
+    this.setState({
+      isActive: true
+    });
+  };
+
+  hideMenu = () => {
+    this.setState({
+      isActive: false
+    });
+  };
+
+  toggleMenu = () => {
+    this.setState(prevState => ({
+      isActive: !prevState.isActive
+    }));
+  };
+
+  render() {
+    const {
+      className,
+      title,
+      children,
+      triggerAction
+    } = this.props;
+
+    const dropDownClass = classNames('dropdown', {
+      'is-active': this.state.isActive
+    }, className);
+
+    const kids = cloneElement(children, {
+      onClick: this.hideMenu
+    })
+
+    let dropDown;
+    if (triggerAction === 'hover') {
+      dropDown = (
+        <div className={dropDownClass} onMouseOver={this.showMenu} onMouseOut={this.hideMenu}>
+          <DropDown.Trigger>{title}</DropDown.Trigger>
+          {kids}
+        </div>
+      )
+    } else {
+      dropDown = (
+        <div className={dropDownClass}>
+          <DropDown.Trigger onClick={this.toggleMenu}>{title}</DropDown.Trigger>
+          {kids}
+        </div>
+      )
+    }
+
+    return dropDown;
+  }
 }
 
 
-// DropDown.propTypes = {
-//   isActive: PropTypes.bool,
-//   disabled: PropTypes.bool,
-//   onMenuChanged: PropTypes.func,
-//   triggerAction: PropTypes.oneOf(['click', 'hover']),
-// }
+DropDown.propTypes = {
+  triggerAction: PropTypes.oneOf(['click', 'hover']),
+}
 
 DropDown.defaultProps = {
-  isActive: false,
-  disabled: false,
-  onMenuChanged: () => {},
   triggerAction: 'hover',
 }
 
-DropDown.Trigger = function DropDownTrigger(props) {
+DropDown.Trigger = function DropDownTrigger({
+  children,
+  ...other
+}) {
   return (
-    <div className="dropdown-trigger">
+    <div className="dropdown-trigger" {...other}>
       <button className="button" aria-haspopup="true" aria-controls="dropdown-menu">
-        <span>{props.children}</span>
-        <span className="icon is-small">
-          <i className="fa fa-angle-down" aria-hidden="true" />
-        </span>
+        <span>{children}</span>
       </button>
     </div>
   )
 };
 
-// DropDown.Menu = function DropDownMenu(props) {
-//   return (
-//     <div className="dropdown-menu" role="menu" onClick={() => props.onClick()}>
-//       <div className="dropdown-content">
-//         {props.children}
-//       </div>
-//     </div>
-//   )
-// }
-
-DropDown.MenuItem = function DropDownMenuItem(props) {
+export const Menu = function Menu(props) {
   return (
-    <div className="dropdown-item">
+    <div className="dropdown-menu" role="menu">
+      <div className="dropdown-content">
+        {props.children}
+      </div>
+    </div>
+  )
+}
+
+Menu.Item = function Item(props) {
+  return (
+    <div  // eslint-disable-line
+      className="dropdown-item"
+      onClick={() => { props.onClick && props.onClick(props) }} // eslint-disable-line
+      disabled={props.disabled}
+    >
       {props.children}
     </div>
   )
 }
 
-export default DropDown;
+Menu.Divider = function Divider() {
+  return (
+    <hr className="dropdown-divider" />
+  )
+}
+
+export default outsideClick(DropDown);
+
