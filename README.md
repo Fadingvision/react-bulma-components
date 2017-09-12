@@ -8,7 +8,7 @@ a set of react components based on bulma.css
 - [x] Icon
 - [x] Notification
 - [x] Progress
-- [ ] Dropdown
+- [x] Dropdown
 - [ ] Modal
 - [ ] Pagination
 - [ ] Tab
