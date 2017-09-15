@@ -9,15 +9,14 @@ const outsideClick = BaseComponent =>
       document.addEventListener('click', this.handleClickOutside);
     }
 
-    componentWillUnmout() {
+    componentWillUnmount() {
       document.removeEventListener('click', this.handleClickOutside);
     }
 
     handleClickOutside = evt => {
-      if (!findDOMNode(this.baseComponentIns).contains(evt.target)) { // eslint-disable-line
-        if (typeof this.baseComponentIns.handleClickOutside === 'function') {
-          this.baseComponentIns.handleClickOutside(evt);
-        }
+      if (!findDOMNode(this.baseComponentIns).contains(evt.target) &&  // eslint-disable-line
+        typeof this.baseComponentIns.handleClickOutside === 'function') {
+        this.baseComponentIns.handleClickOutside(evt);
       }
     };
 
