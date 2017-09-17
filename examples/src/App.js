@@ -7,11 +7,13 @@ import {
   LinearProgress,
   Breadcrumb,
   DropDown,
-  Menu
+  Menu,
+  Modal
 } from '../../src';
 class App extends Component {
-  componentDidMount() {
-  }
+  state = {
+    open: false
+  };
 
   openNotification(msg) {
     notification({
@@ -47,6 +49,11 @@ class App extends Component {
           </Menu.Item>
         </Menu>
       </DropDown>
+      <hr/>
+      <Button type="primary" onClick={() => this.setState({open: true})}>open Modal</Button>
+      <Modal open={this.state.open}>
+        <div className="example-modal">123</div>
+      </Modal>
     </div>;
   }
 }
