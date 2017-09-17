@@ -1,5 +1,6 @@
 import React from 'react';
 import { findDOMNode } from 'react-dom';
+import { toClass } from 'recompose';
 
 const outsideClick = BaseComponent =>
   class extends React.Component {
@@ -21,8 +22,9 @@ const outsideClick = BaseComponent =>
     };
 
     render() {
+      const ClassBaseComponent = toClass(BaseComponent);
       return (
-        <BaseComponent
+        <ClassBaseComponent
           ref={baseComponentIns => { this.baseComponentIns = baseComponentIns }}
           {...this.props}
         />
