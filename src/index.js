@@ -6,3 +6,4 @@ export { default as DropDown, Menu } from './components/DropDown';
 export { default as Modal } from './components/Modal';
 export { LinearProgress } from './components/Progress';
 export { default as PullMore } from './components/PullMore';
+export { default as IndexList } from './components/IndexList';
