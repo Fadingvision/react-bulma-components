@@ -9,8 +9,117 @@ import {
   DropDown,
   Menu,
   PullMore,
+  IndexList,
   Modal
 } from '../../src';
+
+const data = [{
+  index: 'A',
+  children: [{
+    name: '成都A',
+    id: 'chengduA',
+  },{
+    name: '成都A',
+    id: 'chengduA',
+  },{
+    name: '成都A',
+    id: 'chengduA',
+  },{
+    name: '成都A',
+    id: 'chengduA',
+  },{
+    name: '成都A',
+    id: 'chengduA',
+  },{
+    name: '成都A',
+    id: 'chengduA',
+  }]
+},{
+  index: 'B',
+  children: [{
+    name: '成都B',
+    id: 'chengduB',
+  },{
+    name: '成都B',
+    id: 'chengduB',
+  },{
+    name: '成都B',
+    id: 'chengduB',
+  },{
+    name: '成都B',
+    id: 'chengduB',
+  },{
+    name: '成都B',
+    id: 'chengduB',
+  },{
+    name: '成都B',
+    id: 'chengduB',
+  }]
+},{
+  index: 'C',
+  children: [{
+    name: '成都C',
+    id: 'chengduC',
+  },{
+    name: '成都C',
+    id: 'chengduC',
+  },{
+    name: '成都C',
+    id: 'chengduC',
+  },{
+    name: '成都C',
+    id: 'chengduC',
+  },{
+    name: '成都C',
+    id: 'chengduC',
+  },{
+    name: '成都C',
+    id: 'chengduC',
+  }]
+},{
+  index: 'D',
+  children: [{
+    name: '成都D',
+    id: 'chengduD',
+  },{
+    name: '成都D',
+    id: 'chengduD',
+  },{
+    name: '成都D',
+    id: 'chengduD',
+  },{
+    name: '成都D',
+    id: 'chengduD',
+  },{
+    name: '成都D',
+    id: 'chengduD',
+  },{
+    name: '成都D',
+    id: 'chengduD',
+  }]
+},{
+  index: 'E',
+  children: [{
+    name: '成都E',
+    id: 'chengduE',
+  },{
+    name: '成都E',
+    id: 'chengduE',
+  },{
+    name: '成都E',
+    id: 'chengduE',
+  },{
+    name: '成都E',
+    id: 'chengduE',
+  },{
+    name: '成都E',
+    id: 'chengduE',
+  },{
+    name: '成都E',
+    id: 'chengduE',
+  }]
+}]
+
 class App extends Component {
   state = {
     open: false
@@ -60,95 +169,83 @@ class App extends Component {
     )
   }
 
+  renderPullMore() {
+    <PullMore>
+      <ul className="pull-more">
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+        <li>123</li>
+      </ul>
+    </PullMore>
+  }
+
   render() {
     return <div>
-      <div>
-        <ul>
-          <li>sd</li>
-          <li>sd</li>
-          <li>sd</li>
-          <li>sd</li>
-          <li>sd</li>
-          <li>sd</li>
-          <li>sd</li>
-          <li>sd</li>
-          <li>sd</li>
-          <li>sd</li>
-          <li>sd</li>
-          <li>sd</li>
-          <li>sd</li>
-          <li>sd</li>
-          <li>sd</li>
-        </ul>
-      </div>
-      <PullMore>
-        <ul className="pull-more">
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-          <li>123</li>
-        </ul>
-      </PullMore>
+      <IndexList
+        data={data}
+      >
+      </IndexList>
     </div>;
   }
 }

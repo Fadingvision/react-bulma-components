@@ -5,7 +5,28 @@
 
 .scroll-container {
   position:relative;
-  height: 50vh;
+  height: 100vh;
   overflow: hidden;
   width: 100%;
+}
+
+.index-nav{
+  position: absolute;
+  z-index: 30;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: Helvetica;
+}
+
+.index-nav li {
+  padding: 6px 16px 0 16px;
+  line-height: 1;
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+}
+
+.index-nav li.active{
+  color: blue;
 }
