@@ -10,10 +10,13 @@ a set of react components based on bulma.css
 - [x] Progress
 - [x] Dropdown
 - [x] Modal (Image FullScreen)
+- [ ] PullDown(refresh) & PullUp(loading Data)
+- [ ] City picker
+- [ ] Index List
 - [ ] Tooltip
-- [ ] Rrovice/City/Area Select
-- [ ] Upload
+
 - [ ] AutoComplete
+- [ ] Upload
 - [ ] Pagination
 - [ ] Tab
 - [ ] Affix
