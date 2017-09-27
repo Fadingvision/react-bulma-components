@@ -23,10 +23,25 @@
   padding: 6px 16px 0 16px;
   line-height: 1;
   text-align: center;
-  font-size: 14px;
+  font-size: 12px;
   color: #333;
 }
 
 .index-nav li.active{
   color: blue;
+}
+
+.fixed-index-title {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 0;
+  height: 40px;
+  background: rgba(0, 0, 0, .5);
+}
+
+.index-scroll-content > li h5{
+  height: 40px;
+  width: 100%;
+  background: #ccc;
 }
