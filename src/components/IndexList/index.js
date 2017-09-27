@@ -26,6 +26,10 @@ export default class IndexList extends Component {
     this.scroll.on('scrollEnd', this.setActiveIndex);
   }
 
+  componentWillUnmount() {
+    this.scroll.destory();
+  }
+
   onNavTouchMove = evt => {
     evt.stopPropagation(); // 阻止冒泡防止父元素滚动引起的页面抖动
     const firstTouch = evt.touches[0];
