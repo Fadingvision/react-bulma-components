@@ -1,169 +1,51 @@
 import React, { Component } from 'react';
 import BScroll from 'better-scroll';
-// import IScroll from 'iscroll';
-
-let number = 100;
 
 export default class PullMore extends Component {
+  static defaultProps = {
+    pullUpLoad: true,
+    pullDownRefresh: true,
+    handlePullUpLoad: () => {},
+    handlePullDownRefresh: () => {}
+  };
+
   constructor() {
     super();
-    this.state = {
-      list: [
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123,
-        123
-      ]
-    }
+    this.state = {};
   }
 
   componentDidMount() {
-    // this.bsIns = new IScroll(this.scrollContainer);
     this.scroll = new BScroll(this.scrollContainer, {
-      pullUpLoad: true,
-      pullDownRefresh: true,
+      pullUpLoad: this.props.pullUpLoad,
+      pullDownRefresh: this.props.pullDownRefresh
     });
 
     // 开始上拉加载，此时应该通知父元素加载数据
-    this.scroll.on('pullingUp', () => {
-      this.isPullUpLoad = true // 用于展现页面loading效果
-      this.getMoreData()
-    })
-
-    // 开始下拉刷新，此时应该通知父元素加载数据
-    this.scroll.on('pullingDown', () => {
-      this.iPullingDown = true // 用于展现页面loading效果
-      this.getMoreData1()
-    })
+    if (this.props.pullUpLoad) {
+      this.scroll.on('pullingUp', () => {
+        this.isPullUpLoad = true; // 用于展现页面loading效果
+        this.props.handlePullUpLoad().then(this.finish);
+      });
+    }
+    if (this.props.pullDownRefresh) {
+      // 开始下拉刷新，此时应该通知父元素加载数据
+      this.scroll.on('pullingDown', () => {
+        this.iPullingDown = true; // 用于展现页面loading效果
+        this.props.handlePullDownRefresh().then(this.finish);
+      });
+    }
   }
 
-  getMoreData = () => {
-    setTimeout(() => {
-      this.setState(prevState => {
-        const newList = [];
-        for (let i = 0; i < 10; i++) { //eslint-disable-line
-          newList.push(++number); //eslint-disable-line
-        }
-        return {
-          list: prevState.list.concat(newList)
-        }
-      }, () => {
-        // 终止上拉加载并重新计算scroll
-        this.scroll.finishPullUp();
-        this.scroll.refresh();
-      })
-    }, 1500)
+  componentWillUnmount() {
+    this.scroll.destory();
   }
 
-  getMoreData1 = () => {
-    setTimeout(() => {
-      this.setState(prevState => {
-        const newList = [];
-        for (let i = 0; i < 10; i++) { //eslint-disable-line
-          newList.push(++number); //eslint-disable-line
-        }
-        prevState.list.unshift(...newList)
-        return {
-          list: prevState.list
-        }
-      }, () => {
-        // 终止下拉刷新并重新计算scroll
-        this.scroll.finishPullDown();
-        this.scroll.refresh();
-      })
-    }, 1500)
+  finish() {
+    // 终止上拉加载并重新计算scroll
+    if (this.props.pullUpLoad) this.scroll.finishPullUp();
+    // 终止下拉刷新并重新计算scroll
+    if (this.props.pullDownRefresh) this.scroll.finishPullDown();
+    this.scroll.refresh();
   }
 
   render() {
@@ -177,11 +59,7 @@ export default class PullMore extends Component {
         }}
       >
         <ul className="pull-more">
-          {
-            this.state.list.map((item, index) => (
-              <li key={index}>{item}</li> // eslint-disable-line
-            ))
-          }
+          {this.props.children}
         </ul>
       </div>
     );
