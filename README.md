@@ -11,13 +11,9 @@ a set of react components based on bulma.css
 - [x] Dropdown
 - [x] Modal (Image FullScreen)
 - [x] Index List
-- [ ] PullDown(refresh) & PullUp(loading Data)
+- [x] PullDown(refresh) & PullUp(loading Data)
+- [x] Upload
 - [ ] Tooltip
-- [ ] Upload
-- [ ] AutoComplete
-- [ ] SearchBar
-
-- [ ] Picker
 - [ ] Pagination
 - [ ] Tab
 - [ ] Affix
