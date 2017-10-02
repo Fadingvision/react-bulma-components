@@ -1,0 +1,70 @@
+.load-effect{
+    width: 0.666667rem;
+    height: 0.666667rem;
+    position: relative;
+    display: inline-block;
+    margin: 0 auto;
+}
+.load-effect span{
+    width: 0.133333rem;
+    height: 0.133333rem;
+    border-radius: 50%;
+    background: #5c5c5c;
+    position: absolute;
+    animation: load 1.04s ease infinite;
+    transform: scale(.3);
+}
+@keyframes load{
+    0%{
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100%{
+        transform: scale(.3);
+        opacity: 0.5;
+    }
+}
+.load-effect span:nth-child(1){
+    left: 0;
+    top: 50%;
+    margin-top: -0.066667rem;
+    animation-delay:0.13s;
+}
+.load-effect span:nth-child(2){
+    left: 15%;
+    top: 15%;
+    animation-delay:0.26s;
+}
+.load-effect span:nth-child(3){
+    left: 50%;
+    top: 0;
+    margin-left: -0.066667rem;
+    animation-delay:0.39s;
+}
+.load-effect span:nth-child(4){
+    top: 15%;
+    right:15%;
+    animation-delay:0.52s;
+}
+.load-effect span:nth-child(5){
+    right: 0;
+    top: 50%;
+    margin-top: -0.066667rem;
+    animation-delay:0.65s;
+}
+.load-effect span:nth-child(6){
+    right: 15%;
+    bottom:15%;
+    animation-delay:0.78s;
+}
+.load-effect span:nth-child(7){
+    bottom: 0;
+    left: 50%;
+    margin-left: -0.066667rem;
+    animation-delay:0.91s;
+}
+.load-effect span:nth-child(8){
+    bottom: 15%;
+    left: 15%;
+    animation-delay:1.04s;
+}
