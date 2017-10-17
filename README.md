@@ -13,6 +13,7 @@ a set of react components based on bulma.css
 - [x] Index List
 - [x] PullDown(refresh) & PullUp(loading Data)
 - [x] Upload
+- [x] Toast
 - [ ] Tooltip
 - [ ] Pagination
 - [ ] Tab
