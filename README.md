@@ -14,7 +14,7 @@ a set of react components based on bulma.css
 - [x] PullDown(refresh) & PullUp(loading Data)
 - [x] Upload
 - [x] Toast
-- [ ] Tooltip
+- [x] Popover
 - [ ] Pagination
 - [ ] Tab
 - [ ] Affix
